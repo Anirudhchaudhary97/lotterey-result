@@ -21,6 +21,8 @@ export const viewport: Viewport = {
 };
 
 import ToastProvider from "@/components/ToastProvider";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
+import { PwaInstallPrompt } from "@/components/PwaInstallPrompt";
 
 export default function RootLayout({
   children,
@@ -32,6 +34,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[#FAF9F5] text-[#16181F]">
         {children}
         <ToastProvider />
+        <ServiceWorkerRegister />
+        <PwaInstallPrompt />
       </body>
     </html>
   );
