@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { toast } from "react-toastify";
 import { createCouponAction, type CouponFormState } from "@/lib/actions/coupons";
 import { toBsDisplay } from "@/lib/bs-date";
@@ -20,8 +21,10 @@ export function AddCouponDialog() {
     if (wasPending.current && !pending) {
       if (!state.error && !state.fieldErrors) {
         toast.success("Coupon added successfully!");
-        setOpen(false);
-        setPhotoPreview(null);
+        queueMicrotask(() => {
+          setOpen(false);
+          setPhotoPreview(null);
+        });
         formRef.current?.reset();
       } else if (state.error) {
         toast.error(state.error);
@@ -47,7 +50,7 @@ export function AddCouponDialog() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-stamp-red text-white font-semibold text-[13.5px] px-4 py-2.5 rounded-md hover:bg-[#931e19] whitespace-nowrap"
+        className="bg-[#A8241E] text-white font-semibold text-[13.5px] px-4 py-2.5 rounded-md hover:bg-[#931e19] whitespace-nowrap cursor-pointer"
       >
         ＋ Add coupon
       </button>
@@ -57,17 +60,17 @@ export function AddCouponDialog() {
           className="fixed inset-0 bg-black/45 flex items-center justify-center z-[100] p-5"
           onClick={(e) => e.target === e.currentTarget && setOpen(false)}
         >
-          <div className="bg-paper-raised rounded-xl w-full max-w-[460px] max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="flex justify-between items-center px-5.5 py-5 border-b border-line">
-              <h2 className="font-display text-[17px] font-semibold">Add coupon</h2>
-              <button onClick={() => setOpen(false)} className="text-ink-faint text-lg leading-none">
+          <div className="bg-white rounded-xl w-full max-w-[460px] max-h-[90vh] overflow-y-auto shadow-2xl border border-[#C9C4B3]">
+            <div className="flex justify-between items-center px-5.5 py-4 border-b border-[#E2DED2]">
+              <h2 className="font-display text-[17px] font-semibold text-[#16181F]">Add coupon</h2>
+              <button onClick={() => setOpen(false)} className="text-[#8A8E99] hover:text-[#16181F] text-lg font-mono">
                 ✕
               </button>
             </div>
 
             <form ref={formRef} action={formAction} className="p-5.5">
               {state.error && (
-                <p className="text-[13px] text-stamp-red bg-stamp-red-soft border border-[#E4BEB9] rounded-md px-3 py-2 mb-4">
+                <p className="text-[13px] text-[#A8241E] bg-[#F4E2DE] border border-[#A8241E]/30 rounded-md px-3 py-2 mb-4">
                   {state.error}
                 </p>
               )}
@@ -77,7 +80,7 @@ export function AddCouponDialog() {
                   name="couponNumber"
                   placeholder="007315254493"
                   required
-                  className="font-mono w-full px-3 py-2.5 border border-line-strong rounded-md text-[13.5px] outline-none focus:border-seal-blue"
+                  className="font-mono w-full px-3 py-2.5 border border-[#C9C4B3] rounded-md text-[13.5px] outline-none focus:border-[#1E3A5F]"
                 />
               </Field>
 
@@ -85,7 +88,7 @@ export function AddCouponDialog() {
                 <input
                   name="billNumber"
                   placeholder="123456789 (optional)"
-                  className="font-mono w-full px-3 py-2.5 border border-line-strong rounded-md text-[13.5px] outline-none focus:border-seal-blue"
+                  className="font-mono w-full px-3 py-2.5 border border-[#C9C4B3] rounded-md text-[13.5px] outline-none focus:border-[#1E3A5F]"
                 />
               </Field>
 
@@ -95,20 +98,27 @@ export function AddCouponDialog() {
                   name="purchaseDate"
                   value={dateValue}
                   onChange={(e) => setDateValue(e.target.value)}
-                  className="font-mono w-full px-3 py-2.5 border border-line-strong rounded-md text-[13.5px] outline-none focus:border-seal-blue"
+                  className="font-mono w-full px-3 py-2.5 border border-[#C9C4B3] rounded-md text-[13.5px] outline-none focus:border-[#1E3A5F]"
                 />
                 {bsHint && (
-                  <p className="font-mono text-xs text-ink-soft mt-1.5">
+                  <p className="font-mono text-xs text-[#565B66] mt-1.5">
                     ≈ {bsHint} BS (calculated automatically)
                   </p>
                 )}
               </Field>
 
               <Field label="Bill photo">
-                <label className="block border border-dashed border-line-strong rounded-lg p-5 text-center text-[13px] text-ink-soft cursor-pointer hover:border-seal-blue">
+                <label className="block border border-dashed border-[#C9C4B3] rounded-lg p-5 text-center text-[13px] text-[#565B66] cursor-pointer hover:border-[#1E3A5F]">
                   <input type="file" name="billPhoto" accept="image/*" className="hidden" onChange={handlePhotoChange} />
                   {photoPreview ? (
-                    <img src={photoPreview} alt="Bill preview" className="max-h-32 mx-auto rounded" />
+                    <Image
+                      src={photoPreview}
+                      alt="Bill preview"
+                      width={200}
+                      height={120}
+                      unoptimized
+                      className="max-h-32 mx-auto rounded object-contain"
+                    />
                   ) : (
                     <>
                       <span className="block text-xl mb-1.5">📷</span>
@@ -122,14 +132,14 @@ export function AddCouponDialog() {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="bg-paper-raised text-ink border border-line-strong font-semibold text-[13.5px] px-4 py-2.5 rounded-md hover:bg-[#F1EFE7]"
+                  className="bg-white text-[#16181F] border border-[#C9C4B3] font-semibold text-[13.5px] px-4 py-2.5 rounded-md hover:bg-[#FAF9F5]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={pending}
-                  className="bg-stamp-red text-white font-semibold text-[13.5px] px-4 py-2.5 rounded-md hover:bg-[#931e19] disabled:opacity-60"
+                  className="bg-[#A8241E] text-white font-semibold text-[13.5px] px-4 py-2.5 rounded-md hover:bg-[#931e19] disabled:opacity-60 cursor-pointer"
                 >
                   {pending ? "Saving…" : "Save coupon"}
                 </button>
@@ -155,11 +165,11 @@ function Field({
 }) {
   return (
     <div className="mb-4">
-      <label className="block text-[12.5px] font-semibold mb-1.5">
-        {label} {required && <span className="text-stamp-red">*</span>}
+      <label className="block text-[12.5px] font-semibold mb-1.5 text-[#16181F]">
+        {label} {required && <span className="text-[#A8241E]">*</span>}
       </label>
       {children}
-      {error && <p className="text-[12px] text-stamp-red mt-1.5">{error}</p>}
+      {error && <p className="text-[12px] text-[#A8241E] mt-1.5 font-mono">{error}</p>}
     </div>
   );
 }

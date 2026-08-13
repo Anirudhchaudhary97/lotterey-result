@@ -30,7 +30,9 @@ export function EditCouponDialog({
     if (wasPending.current && !pending) {
       if (!state.error && !state.fieldErrors) {
         toast.success("Coupon updated successfully!");
-        onClose();
+        queueMicrotask(() => {
+          onClose();
+        });
       } else if (state.error) {
         toast.error(state.error);
       }
@@ -129,7 +131,7 @@ export function EditCouponDialog({
             <button
               type="submit"
               disabled={pending}
-              className="px-4 py-2 bg-[#16181F] text-white text-sm font-semibold rounded-md hover:bg-[#2b2e38] disabled:opacity-60"
+              className="px-4 py-2 bg-[#16181F] text-white text-sm font-semibold rounded-md hover:bg-[#2b2e38] disabled:opacity-60 cursor-pointer"
             >
               {pending ? "Updating…" : "Save Changes"}
             </button>
