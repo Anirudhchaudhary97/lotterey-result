@@ -267,6 +267,6 @@ export async function resetPasswordAction(
 /** Handles user logout. */
 export async function logoutAction() {
   await destroySession();
-  redirect("/login");
+  redirect("/");
 }
 
