@@ -20,6 +20,8 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
+import ToastProvider from "@/components/ToastProvider";
+
 export default function RootLayout({
   children,
 }: {
@@ -27,7 +29,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-[#FAF9F5] text-[#16181F]">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#FAF9F5] text-[#16181F]">
+        {children}
+        <ToastProvider />
+      </body>
     </html>
   );
 }

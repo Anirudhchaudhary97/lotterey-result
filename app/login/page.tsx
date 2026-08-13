@@ -1,8 +1,9 @@
 "use client";
 
-import { useActionState, Suspense } from "react";
+import { useActionState, Suspense, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 import { loginAction, type AuthFormState } from "@/lib/actions/auth";
 
 const initialState: AuthFormState = {};
@@ -13,6 +14,12 @@ function LoginForm() {
   const [state, formAction, isPending] = useActionState(loginAction, initialState);
 
   const displayError = state.error || queryError;
+
+  useEffect(() => {
+    if (displayError) {
+      toast.error(displayError);
+    }
+  }, [displayError]);
 
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#16181F] flex flex-col justify-center py-12 px-6">

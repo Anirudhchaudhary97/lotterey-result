@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import { createCouponAction, type AddCouponState } from "@/lib/actions/coupons";
 import { toBsDisplay } from "@/lib/bs-date";
 
@@ -16,10 +17,15 @@ export function AddCouponDialog() {
 
   // Close + reset once a submit finishes with no error (success case).
   useEffect(() => {
-    if (wasPending.current && !pending && !state.error && !state.fieldErrors) {
-      setOpen(false);
-      setPhotoPreview(null);
-      formRef.current?.reset();
+    if (wasPending.current && !pending) {
+      if (!state.error && !state.fieldErrors) {
+        toast.success("Coupon added successfully!");
+        setOpen(false);
+        setPhotoPreview(null);
+        formRef.current?.reset();
+      } else if (state.error) {
+        toast.error(state.error);
+      }
     }
     wasPending.current = pending;
   }, [pending, state]);

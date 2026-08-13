@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { toast } from "react-toastify";
 import { logoutAction } from "@/lib/actions/auth";
 
 const LINKS = [
@@ -47,6 +48,7 @@ export function Sidebar({ userEmail }: { userEmail: string }) {
         <form action={logoutAction}>
           <button
             type="submit"
+            onClick={() => toast.info("Logged out successfully")}
             className="w-full text-left text-xs font-mono text-[#A8241E] hover:text-[#f4e2de] flex items-center gap-2 transition-colors py-1"
           >
             <span>↳</span> Log out
