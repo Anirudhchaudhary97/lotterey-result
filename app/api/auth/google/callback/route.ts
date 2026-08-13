@@ -85,7 +85,7 @@ export async function GET(request: Request) {
     // 4. Create Session
     await createSession(user.id, user.email);
 
-    return NextResponse.redirect(`${origin}/dashboard`);
+    return NextResponse.redirect(`${origin}/dashboard?toast=logged_in`);
   } catch (err) {
     console.error("Google Callback Error:", err);
     return NextResponse.redirect(`${origin}/login?error=An unexpected error occurred during Google authentication`);

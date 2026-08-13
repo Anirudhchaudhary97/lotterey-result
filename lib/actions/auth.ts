@@ -92,7 +92,7 @@ export async function registerAction(
     return { error: "Failed to create account. Please try again." };
   }
 
-  redirect("/dashboard");
+  redirect("/dashboard?toast=registered");
 }
 
 /** Handles existing user login. */
@@ -137,7 +137,7 @@ export async function loginAction(
     return { error: "Failed to log in. Please try again." };
   }
 
-  redirect("/dashboard");
+  redirect("/dashboard?toast=logged_in");
 }
 
 /** Handles password reset link request. */
@@ -267,6 +267,6 @@ export async function resetPasswordAction(
 /** Handles user logout. */
 export async function logoutAction() {
   await destroySession();
-  redirect("/");
+  redirect("/?toast=logged_out");
 }
 
