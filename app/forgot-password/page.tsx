@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { requestPasswordResetAction, type AuthFormState } from "@/lib/actions/auth";
@@ -9,14 +9,18 @@ const initialState: AuthFormState = {};
 
 export default function ForgotPasswordPage() {
   const [state, formAction, isPending] = useActionState(requestPasswordResetAction, initialState);
+  const prevStateRef = useRef(state);
 
   useEffect(() => {
-    if (state.error) {
-      toast.error(state.error);
-    } else if (state.success) {
-      toast.success(state.message || "Password reset email sent!");
+    if (state !== prevStateRef.current) {
+      if (state.error) {
+        toast.error(state.error);
+      } else if (state.success) {
+        toast.success(state.message || "Password reset instructions sent!");
+      }
+      prevStateRef.current = state;
     }
-  }, [state.error, state.success, state.message]);
+  }, [state]);
 
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#16181F] flex flex-col justify-center py-12 px-6">

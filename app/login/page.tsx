@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, Suspense, useEffect } from "react";
+import { useActionState, Suspense, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
@@ -12,14 +12,22 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const queryError = searchParams.get("error");
   const [state, formAction, isPending] = useActionState(loginAction, initialState);
-
-  const displayError = state.error || queryError;
+  const prevStateRef = useRef(state);
 
   useEffect(() => {
-    if (displayError) {
-      toast.error(displayError);
+    if (state !== prevStateRef.current) {
+      if (state.error) {
+        toast.error(state.error);
+      }
+      prevStateRef.current = state;
     }
-  }, [displayError]);
+  }, [state]);
+
+  useEffect(() => {
+    if (queryError) {
+      toast.error(queryError);
+    }
+  }, [queryError]);
 
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#16181F] flex flex-col justify-center py-12 px-6">
@@ -41,12 +49,6 @@ function LoginForm() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-6 shadow-xl border border-[#C9C4B3] rounded-xl sm:px-10">
-          {displayError && (
-            <div className="mb-5 p-3.5 rounded-lg bg-[#F4E2DE] border border-[#A8241E]/40 text-[#A8241E] text-xs font-mono">
-              {displayError}
-            </div>
-          )}
-
           {/* Google Login Button */}
           <div className="mb-5">
             <a

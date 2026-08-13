@@ -18,7 +18,8 @@ export default function ToastProvider() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="colored"
+        style={{ zIndex: 99999 }}
       />
       <Suspense fallback={null}>
         <ToastListener />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { registerAction, type AuthFormState } from "@/lib/actions/auth";
@@ -9,12 +9,16 @@ const initialState: AuthFormState = {};
 
 export default function RegisterPage() {
   const [state, formAction, isPending] = useActionState(registerAction, initialState);
+  const prevStateRef = useRef(state);
 
   useEffect(() => {
-    if (state.error) {
-      toast.error(state.error);
+    if (state !== prevStateRef.current) {
+      if (state.error) {
+        toast.error(state.error);
+      }
+      prevStateRef.current = state;
     }
-  }, [state.error]);
+  }, [state]);
 
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#16181F] flex flex-col justify-center py-12 px-6">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, Suspense, useEffect } from "react";
+import { useActionState, Suspense, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
@@ -12,14 +12,18 @@ function ResetPasswordForm() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const [state, formAction, isPending] = useActionState(resetPasswordAction, initialState);
+  const prevStateRef = useRef(state);
 
   useEffect(() => {
-    if (state.error) {
-      toast.error(state.error);
-    } else if (state.success) {
-      toast.success("Password reset successful!");
+    if (state !== prevStateRef.current) {
+      if (state.error) {
+        toast.error(state.error);
+      } else if (state.success) {
+        toast.success(state.message || "Password updated successfully!");
+      }
+      prevStateRef.current = state;
     }
-  }, [state.error, state.success]);
+  }, [state]);
 
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#16181F] flex flex-col justify-center py-12 px-6">
