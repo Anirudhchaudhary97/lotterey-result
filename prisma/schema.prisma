@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String?
+  email        String   @unique
+  passwordHash String?
+  googleId     String?  @unique
+  avatarUrl    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+  coupons      Coupon[]
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Coupon {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  couponNumber   String
+  billNumber     String
+  purchaseDate   DateTime
+  purchaseDateBS String?
+  billPhotoUrl   String?
+  status         String   @default("PENDING") // PENDING, CHECKED, WINNER
+  drawId         String?
+  draw           Draw?    @relation(fields: [drawId], references: [id])
+  winnerId       String?  @unique
+  winner         Winner?  @relation(fields: [winnerId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+
+  @@unique([userId, couponNumber, billNumber])
+}
+
+model Draw {
+  id              String   @id @default(uuid())
+  irdDrawId       String?  @unique
+  categoryId      String?
+  categoryTitleEn String   @default("General")
+  categoryTitleNe String?
+  drawType        String?  // BUMPER, DAILY
+  titleEn         String
+  titleNe         String?
+  eligibleFrom    DateTime
+  eligibleTo      DateTime
+  publishedAt     DateTime @default(now())
+  claimDeadline   DateTime
+  claimOpen       Boolean  @default(true)
+  syncedAt        DateTime @default(now())
+  coupons         Coupon[]
+  winners         Winner[]
+  createdAt       DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+}
+
+model Winner {
+  id           String   @id @default(uuid())
+  drawId       String
+  draw         Draw     @relation(fields: [drawId], references: [id], onDelete: Cascade)
+  rank         Int
+  fiscalYear   String?
+  couponNumber String
+  coupon       Coupon?
+  createdAt    DateTime @default(now())
+}
