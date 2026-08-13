@@ -9,7 +9,7 @@ export async function sendPasswordResetEmail(toEmail: string, resetLink: string)
   const smtpPort = parseInt(process.env.SMTP_PORT || "587", 10);
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
-  const smtpFrom = process.env.SMTP_FROM || `"PrizeTrack" <noreply@prizetrack.app>`;
+  const smtpFrom = process.env.SMTP_FROM || `"PrizeTrack" <onboarding@resend.dev>`;
 
   const htmlContent = `
     <!DOCTYPE html>
