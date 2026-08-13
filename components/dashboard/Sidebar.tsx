@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { LayoutDashboard, Ticket, Trophy, LogOut } from "lucide-react";
-import { toast } from "react-toastify";
 import { logoutAction } from "@/lib/actions/auth";
 import { BrandLogo } from "@/components/BrandLogo";
 
@@ -57,32 +56,12 @@ export function Sidebar({ userEmail }: { userEmail: string }) {
         <form action={logoutAction}>
           <button
             type="submit"
-            onClick={() => toast.info("Logged out successfully")}
             className="w-full text-left text-xs font-mono text-[#A8241E] hover:text-[#f4e2de] flex items-center gap-2 transition-colors py-1.5 cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
             Log out
           </button>
         </form>
-
-        <div className="pt-2 text-[10px] font-mono text-[#6F7280] leading-normal">
-          Developed by{" "}
-          <a
-            href="https://www.linkedin.com/in/anurudh-chaudhary-332897202/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#A8241E] hover:underline font-semibold"
-          >
-            Anirudh Chaudhary
-          </a>
-          <a
-            href="mailto:anurudhchaudhay97@gmail.com"
-            className="block text-[#9CA3AF] hover:text-[#A8241E] hover:underline text-[9.5px] mt-0.5 truncate"
-            title="anurudhchaudhay97@gmail.com"
-          >
-            anurudhchaudhay97@gmail.com
-          </a>
-        </div>
       </div>
     </aside>
   );
