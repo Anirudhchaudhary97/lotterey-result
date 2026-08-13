@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { resetPasswordAction, type AuthFormState } from "@/lib/actions/auth";
+import { BrandLogo } from "@/components/BrandLogo";
 
 const initialState: AuthFormState = {};
 
@@ -28,13 +29,9 @@ function ResetPasswordForm() {
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#16181F] flex flex-col justify-center py-12 px-6">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <Link
-          href="/"
-          className="font-display font-bold text-2xl flex items-center justify-center gap-2 tracking-tight mb-6"
-        >
-          <span className="w-2.5 h-2.5 rounded-full bg-[#A8241E]" />
-          PrizeTrack
-        </Link>
+        <div className="flex justify-center mb-6">
+          <BrandLogo size="lg" />
+        </div>
         <h2 className="text-center text-2xl font-bold font-display tracking-tight text-[#16181F]">
           Set new password
         </h2>

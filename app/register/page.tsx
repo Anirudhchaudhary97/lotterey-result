@@ -4,6 +4,7 @@ import { useActionState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { registerAction, type AuthFormState } from "@/lib/actions/auth";
+import { BrandLogo } from "@/components/BrandLogo";
 
 const initialState: AuthFormState = {};
 
@@ -23,13 +24,9 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#16181F] flex flex-col justify-center py-12 px-6">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <Link
-          href="/"
-          className="font-display font-bold text-2xl flex items-center justify-center gap-2 tracking-tight mb-6"
-        >
-          <span className="w-2.5 h-2.5 rounded-full bg-[#A8241E]" />
-          PrizeTrack
-        </Link>
+        <div className="flex justify-center mb-6">
+          <BrandLogo size="lg" />
+        </div>
         <h2 className="text-center text-2xl font-bold font-display tracking-tight text-[#16181F]">
           Create your free account
         </h2>

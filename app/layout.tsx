@@ -2,14 +2,14 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PrizeTrack — IRD Prize Tracker",
+  title: "MeroPrize — Pay Bill • Win Everyday",
   description:
     "Save your IRD prize coupons once and automatically check them against published official IRD winner lists.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "PrizeTrack",
+    title: "MeroPrize",
   },
 };
 

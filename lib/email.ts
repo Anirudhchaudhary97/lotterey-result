@@ -9,7 +9,7 @@ export async function sendPasswordResetEmail(toEmail: string, resetLink: string)
   const smtpPort = parseInt(process.env.SMTP_PORT || "587", 10);
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
-  const smtpFrom = process.env.SMTP_FROM || `"PrizeTrack" <onboarding@resend.dev>`;
+  const smtpFrom = process.env.SMTP_FROM || `"MeroPrize" <onboarding@resend.dev>`;
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -32,9 +32,9 @@ export async function sendPasswordResetEmail(toEmail: string, resetLink: string)
       </head>
       <body>
         <div class="container">
-          <div class="logo"><span class="dot"></span> PrizeTrack</div>
+          <div class="logo"><span class="dot"></span> MeroPrize</div>
           <h1>Reset Your Password</h1>
-          <p>We received a request to reset the password for your PrizeTrack account associated with <strong>${toEmail}</strong>.</p>
+          <p>We received a request to reset the password for your MeroPrize account associated with <strong>${toEmail}</strong>.</p>
           <p>Click the button below to set a new password. This link is valid for 1 hour.</p>
           <div class="button-container">
             <a href="${resetLink}" class="button" target="_blank">Reset Password →</a>
@@ -43,7 +43,7 @@ export async function sendPasswordResetEmail(toEmail: string, resetLink: string)
           <p class="link-text"><a href="${resetLink}">${resetLink}</a></p>
           <p style="margin-top: 24px; font-size: 13px; color: #8C919E;">If you didn't request a password reset, you can safely ignore this email.</p>
           <div class="footer">
-            PrizeTrack — Inland Revenue Department Nepal Bill Tracker
+            MeroPrize — Pay Bill • Win Everyday (IRD Nepal Bill Tracker)
           </div>
         </div>
       </body>
@@ -64,7 +64,7 @@ export async function sendPasswordResetEmail(toEmail: string, resetLink: string)
     await transporter.sendMail({
       from: smtpFrom,
       to: toEmail,
-      subject: "Reset your PrizeTrack password",
+      subject: "Reset your MeroPrize password",
       html: htmlContent,
     });
     console.log(`[Email Service] Password reset email sent successfully to ${toEmail}`);

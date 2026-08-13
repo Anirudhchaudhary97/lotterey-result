@@ -16,7 +16,7 @@ export default function ToastListener() {
     if (toastParam === "logged_in") {
       toast.success("Logged in successfully! Welcome back.");
     } else if (toastParam === "registered") {
-      toast.success("Account created successfully! Welcome to PrizeTrack.");
+      toast.success("Account created successfully! Welcome to MeroPrize.");
     } else if (toastParam === "logged_out") {
       toast.info("Logged out successfully. See you soon!");
     } else if (toastParam === "password_reset") {

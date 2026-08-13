@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { BrandLogo } from "@/components/BrandLogo";
 
 const FAQS = [
   {
     q: "Is this the official IRD site?",
-    a: "No. PrizeTrack is an independent, unofficial tool that reads IRD's published winner data. Enrollment, claims, and prize disbursement all still happen through the official IRD channels.",
+    a: "No. MeroPrize is an independent, unofficial tool that reads IRD's published winner data. Enrollment, claims, and prize disbursement all still happen through official IRD channels.",
   },
   {
     q: "How quickly do you know when I've won?",
@@ -30,10 +31,8 @@ export default function LandingPage() {
       {/* ---------- NAV ---------- */}
       <nav className="sticky top-0 z-50 bg-[#FAF9F5]/90 backdrop-blur-md border-b border-[#E2DED2]">
         <div className="max-w-[1160px] mx-auto px-7 h-[68px] flex items-center justify-between">
-          <Link href="/" className="font-display font-bold text-[19px] flex items-center gap-2 tracking-tight">
-            <span className="w-2 h-2 rounded-full bg-[#A8241E]" />
-            PrizeTrack
-          </Link>
+          <BrandLogo size="md" />
+
           <div className="hidden md:flex items-center gap-9">
             <a href="#how" className="text-[14.5px] text-[#565B66] font-medium hover:text-[#16181F]">
               How it works
@@ -72,8 +71,7 @@ export default function LandingPage() {
               Forget the rest. <em className="not-italic text-[#A8241E]">We&apos;ll check.</em>
             </h1>
             <p className="text-[17.5px] text-[#565B66] max-w-[460px] mb-8 leading-relaxed">
-              Enroll your bill on IRD like always. Save the coupon number here, and we&apos;ll match it against every
-              published winner list — automatically, the moment results come out.
+              Enroll your bill on IRD like always. Save the coupon number here on <strong>MeroPrize</strong>, and we&apos;ll match it against every published winner list — automatically!
             </p>
             <div className="flex items-center gap-5 flex-wrap">
               <Link
@@ -313,10 +311,7 @@ export default function LandingPage() {
 
       <footer className="py-14 border-t border-[#E2DED2] max-w-[1160px] mx-auto px-7">
         <div className="flex justify-between items-start flex-wrap gap-6 pb-7 border-b border-[#E2DED2] mb-5.5">
-          <Link href="/" className="font-display font-bold text-[19px] flex items-center gap-2 tracking-tight">
-            <span className="w-2 h-2 rounded-full bg-[#A8241E]" />
-            PrizeTrack
-          </Link>
+          <BrandLogo size="md" />
           <div className="flex gap-7 text-[13.5px] text-[#565B66]">
             <a href="#how" className="hover:text-[#16181F]">
               How it works
@@ -333,7 +328,7 @@ export default function LandingPage() {
           </div>
         </div>
         <p className="text-[12.5px] text-[#565B66] font-mono leading-relaxed max-w-[640px]">
-          PRIZETRACK IS AN INDEPENDENT, UNOFFICIAL TOOL AND IS NOT AFFILIATED WITH, ENDORSED BY, OR OPERATED BY THE
+          MEROPRIZE IS AN INDEPENDENT, UNOFFICIAL TOOL AND IS NOT AFFILIATED WITH, ENDORSED BY, OR OPERATED BY THE
           INLAND REVENUE DEPARTMENT, NEPAL. WINNER DATA IS SOURCED FROM IRD&apos;S PUBLIC PUBLICATIONS. ALWAYS CONFIRM
           CLAIM ELIGIBILITY THROUGH OFFICIAL IRD CHANNELS.
         </p>

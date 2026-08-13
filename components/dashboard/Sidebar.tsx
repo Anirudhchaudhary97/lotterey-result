@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { LayoutDashboard, Ticket, Trophy, LogOut } from "lucide-react";
 import { toast } from "react-toastify";
 import { logoutAction } from "@/lib/actions/auth";
+import { BrandLogo } from "@/components/BrandLogo";
 
 const LINKS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -17,10 +18,9 @@ export function Sidebar({ userEmail }: { userEmail: string }) {
 
   return (
     <aside className="w-64 bg-[#14161C] text-[#E7E7EA] p-6 flex flex-col hidden md:flex shrink-0 border-r border-[#262832]">
-      <Link href="/" className="font-display font-bold text-[18px] flex items-center gap-2.5 px-2 pb-8">
-        <span className="w-2.5 h-2.5 rounded-full bg-[#A8241E] shadow-sm shadow-[#A8241E]/50" />
-        PrizeTrack
-      </Link>
+      <div className="pb-8 px-1">
+        <BrandLogo darkBg size="md" showTagline />
+      </div>
 
       <nav className="flex flex-col gap-1.5 flex-1">
         {LINKS.map((link) => {
