@@ -54,4 +54,8 @@ next-env.d.ts
 skills-lock.json
 *.resolved
 
+AGENTS.md
+ARCHITECTURE.md
+
+
 
