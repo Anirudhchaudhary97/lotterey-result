@@ -332,6 +332,30 @@ export default function LandingPage() {
           INLAND REVENUE DEPARTMENT, NEPAL. WINNER DATA IS SOURCED FROM IRD&apos;S PUBLIC PUBLICATIONS. ALWAYS CONFIRM
           CLAIM ELIGIBILITY THROUGH OFFICIAL IRD CHANNELS.
         </p>
+
+        <div className="mt-8 pt-6 border-t border-[#E2DED2] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#565B66]">
+          <div>
+            © {new Date().getFullYear()} MeroPrize. All rights reserved.
+          </div>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 justify-center sm:justify-end">
+            <span>Developed by</span>
+            <a
+              href="https://www.linkedin.com/in/anurudh-chaudhary-332897202/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#A8241E] hover:underline"
+            >
+              Anirudh Chaudhary
+            </a>
+            <span className="text-[#A8ABB5]">·</span>
+            <a
+              href="mailto:anurudhchaudhary97@gmail.com"
+              className="text-[#565B66] hover:text-[#A8241E] hover:underline font-mono"
+            >
+              anurudhchaudhary97@gmail.com
+            </a>
+          </div>
+        </div>
       </footer>
     </div>
   );

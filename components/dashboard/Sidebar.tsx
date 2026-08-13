@@ -64,6 +64,25 @@ export function Sidebar({ userEmail }: { userEmail: string }) {
             Log out
           </button>
         </form>
+
+        <div className="pt-2 text-[10px] font-mono text-[#6F7280] leading-normal">
+          Developed by{" "}
+          <a
+            href="https://www.linkedin.com/in/anurudh-chaudhary-332897202/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#A8241E] hover:underline font-semibold"
+          >
+            Anirudh Chaudhary
+          </a>
+          <a
+            href="mailto:anurudhchaudhay97@gmail.com"
+            className="block text-[#9CA3AF] hover:text-[#A8241E] hover:underline text-[9.5px] mt-0.5 truncate"
+            title="anurudhchaudhay97@gmail.com"
+          >
+            anurudhchaudhay97@gmail.com
+          </a>
+        </div>
       </div>
     </aside>
   );
