@@ -7,7 +7,11 @@ export const couponFormSchema = z.object({
     .min(6, "Coupon number looks too short")
     .max(20, "Coupon number looks too long")
     .regex(/^[0-9A-Za-z\s]+$/, "Coupon number can only contain letters and numbers"),
-  billNumber: z.string().trim().min(1, "Bill number is required"),
+  billNumber: z
+    .string()
+    .trim()
+    .optional()
+    .transform((val) => val || ""),
   purchaseDate: z.coerce.date({ message: "Enter a valid purchase date" }),
 });
 

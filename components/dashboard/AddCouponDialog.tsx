@@ -2,10 +2,10 @@
 
 import { useActionState, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { createCouponAction, type AddCouponState } from "@/lib/actions/coupons";
+import { createCouponAction, type CouponFormState } from "@/lib/actions/coupons";
 import { toBsDisplay } from "@/lib/bs-date";
 
-const initialState: AddCouponState = {};
+const initialState: CouponFormState = {};
 
 export function AddCouponDialog() {
   const [open, setOpen] = useState(false);
@@ -81,11 +81,10 @@ export function AddCouponDialog() {
                 />
               </Field>
 
-              <Field label="Bill number" required error={state.fieldErrors?.billNumber}>
+              <Field label="Bill number (optional)" error={state.fieldErrors?.billNumber}>
                 <input
                   name="billNumber"
-                  placeholder="123456789"
-                  required
+                  placeholder="123456789 (optional)"
                   className="font-mono w-full px-3 py-2.5 border border-line-strong rounded-md text-[13.5px] outline-none focus:border-seal-blue"
                 />
               </Field>
