@@ -4,6 +4,8 @@ import { toCouponDTO } from "@/lib/coupon-dto";
 import { StatsRow } from "@/components/dashboard/StatsRow";
 import { DrawBanner, type DrawBannerData } from "@/components/dashboard/DrawBanner";
 import { CouponList } from "@/components/dashboard/CouponList";
+import { AddCouponDialog } from "@/components/dashboard/AddCouponDialog";
+import { Button } from "@/components/ui/button";
 
 export default async function DashboardPage() {
   const userId = await getCurrentUserId();
@@ -14,8 +16,6 @@ export default async function DashboardPage() {
       include: { draw: true, winner: { include: { draw: true } } },
       orderBy: { createdAt: "desc" },
     }),
-    // "Current" draw = the most recently published one; falls back to the
-    // most recently synced draw if none are published yet.
     prisma.draw.findFirst({ orderBy: { publishedAt: "desc" } }),
   ]);
 
@@ -31,13 +31,17 @@ export default async function DashboardPage() {
     : null;
 
   return (
-    <div>
-      <div className="flex justify-between items-end mb-6.5 flex-wrap gap-3.5">
+    <div className="space-y-6">
+      <div className="flex justify-between items-center flex-wrap gap-4 border-b border-[#E2DED2] pb-5">
         <div>
-          <h1 className="font-display text-[25px] font-semibold tracking-tight">Your coupons</h1>
-          <p className="text-ink-soft text-[13.5px] mt-1">
-            Automatically checked against every published IRD draw.
+          <h1 className="font-display text-2xl font-bold tracking-tight text-[#16181F]">Dashboard Overview</h1>
+          <p className="text-[#565B66] text-xs sm:text-sm mt-1">
+            Track your coupons automatically checked against official IRD Nepal winner publications.
           </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <AddCouponDialog />
         </div>
       </div>
 
