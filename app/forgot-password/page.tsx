@@ -42,23 +42,6 @@ export default function ForgotPasswordPage() {
                 <p className="text-xs">{state.message}</p>
               </div>
 
-              {state.resetToken && (
-                <div className="p-4 rounded-lg bg-[#FAF9F5] border border-[#C9C4B3] text-xs space-y-2">
-                  <span className="inline-block px-2 py-0.5 rounded bg-[#A8241E] text-white font-mono text-[10px] uppercase font-bold tracking-wider">
-                    Dev Test Helper
-                  </span>
-                  <p className="text-[#565B66]">
-                    Since email delivery is simulated in local dev mode, click the link below to test resetting your password:
-                  </p>
-                  <Link
-                    href={`/reset-password?token=${state.resetToken}`}
-                    className="mt-2 inline-flex items-center gap-1.5 px-3 py-2 bg-[#16181F] text-white rounded-md text-xs font-medium hover:bg-[#2b2e38] transition-colors"
-                  >
-                    Reset Password Now →
-                  </Link>
-                </div>
-              )}
-
               <div className="border-t border-[#E2DED2] pt-4 text-center">
                 <Link href="/login" className="text-xs font-semibold text-[#A8241E] hover:underline">
                   ← Return to Log in

@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { createSession, destroySession } from "@/lib/auth";
+import { sendPasswordResetEmail } from "@/lib/email";
 
 import crypto from "crypto";
 
@@ -39,7 +40,6 @@ export interface AuthFormState {
   success?: boolean;
   message?: string;
   fieldErrors?: Record<string, string>;
-  resetToken?: string;
 }
 
 /** Handles new user registration. */
@@ -191,10 +191,15 @@ export async function requestPasswordResetAction(
       },
     });
 
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const resetLink = `${appUrl}/reset-password?token=${token}`;
+
+    // Send real transactional email
+    await sendPasswordResetEmail(email, resetLink);
+
     return {
       success: true,
-      message: "Password reset instructions have been generated successfully.",
-      resetToken: token,
+      message: "If an account exists with this email address, password reset instructions have been sent to your email inbox.",
     };
   } catch (err) {
     console.error("requestPasswordResetAction error:", err);
