@@ -47,9 +47,11 @@ next-env.d.ts
 *.db
 *.db-journal
 
-# AI / Agent folders & lock files
+# AI / Agent folders, lock files & temporary resolved artifacts
 .agents/
 .claude/
 .windsurf/
 skills-lock.json
+*.resolved
+
 
